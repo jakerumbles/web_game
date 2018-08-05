@@ -1,14 +1,14 @@
 var snake;
 
 function setup() {
-   createCanvas(800, 800);
+   createCanvas(700, 700);
    snake = new Snake();
 }
 
 function draw() {
    background(100);
-   frameRate(20)
-   snake.updateScale();
+   frameRate(10)
+   //snake.updateScale();
    snake.updatePosition()
    snake.show();
 }
@@ -29,11 +29,11 @@ function keyPressed() {
 }
 
 function Snake() {
-   this.x = 0;
-   this.y = 0;
+   this.x = Math.floor(Math.random() * 700);
+   this.y = Math.floor(Math.random() * 700);
    this.xspeed = 1;
    this.yspeed = 0;
-   this.scale = 1;
+   this.scale = 4;
 
    this.updatePosition = function() {
       this.x = this.x + this.xspeed * this.scale;
@@ -51,7 +51,7 @@ function Snake() {
    }
 
    this.updateScale = function() {
-      this.scale = document.getElementById('scaleInput').value;
+      var scale = document.getElementById('scaleInput').value;
       console.log(scale);
    }
 }
