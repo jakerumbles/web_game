@@ -1,8 +1,11 @@
 var snake;
+var food;
+var scl = 20;
 
 function setup() {
    createCanvas(700, 700);
    snake = new Snake();
+   food = new Food();
 }
 
 function draw() {
@@ -11,6 +14,14 @@ function draw() {
    //snake.updateScale();
    snake.updatePosition()
    snake.show();
+
+   //If true, snake is on top of food and can eat it
+   if (food.getX() === snake.getX() && food.getY() === snake.getY()) {
+      snake.eat(); //Update foodEaten for Snake
+      food.newFood(); //Change position of food to a new random coordinate
+   }
+   food.drawFood(); //Draw the food
+
 }
 
 function keyPressed() {
@@ -28,30 +39,77 @@ function keyPressed() {
    }
 }
 
+function pickLocation() {
+   //var cols = floor(wid)
+}
+
 function Snake() {
-   this.x = Math.floor(Math.random() * 700);
-   this.y = Math.floor(Math.random() * 700);
+   this.x = randPlace();
+   this.y = randPlace();
    this.xspeed = 1;
    this.yspeed = 0;
-   this.scale = 4;
+   this.foodEaten = 0;
 
    this.updatePosition = function() {
-      this.x = this.x + this.xspeed * this.scale;
-      this.y = this.y + this.yspeed * this.scale;
+      this.x = this.x + this.xspeed * scl;
+      this.y = this.y + this.yspeed * scl;
    }
 
+   //Draw the snake
    this.show = function() {
-      fill(255);
-      rect(this.x, this.y, 10,10);
+      fill('green');
+      rect(this.x, this.y, 20,20);
    }
 
+   //Change the direction of the snake
    this.direction = function(x, y) {
       this.xspeed = x;
       this.yspeed = y;
    }
 
    this.updateScale = function() {
-      var scale = document.getElementById('scaleInput').value;
+      scale = document.getElementById('scaleInput').value;
       console.log(scale);
    }
+
+   this.eat = function() {
+      this.foodEaten++;
+      console.log("Food eaten");
+   }
+
+   this.getX = function() {
+      return this.x;
+   }
+
+   this.getY = function() {
+      return this.y;
+   }
+}
+
+function Food() {
+   this.x = randPlace();
+   this.y = randPlace();
+
+   this.drawFood = function() {
+      fill(255, 204, 0);
+      ellipse(this.x, this.y, 20, 20);
+   }
+
+   this.newFood = function() {
+      this.x = randPlace();
+      this.y = randPlace();
+   }
+
+   this.getX = function() {
+      return this.x;
+   }
+
+   this.getY = function() {
+      return this.y;
+   }
+}
+
+//return a random number within 0-699
+function randPlace() {
+   return Math.floor(Math.random() * 700);
 }
