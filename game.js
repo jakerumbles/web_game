@@ -7,7 +7,8 @@ function setup() {
 
 function draw() {
    background(100);
-   frameRate(60)
+   frameRate(20)
+   snake.updateScale();
    snake.updatePosition()
    snake.show();
 }
@@ -32,7 +33,7 @@ function Snake() {
    this.y = 0;
    this.xspeed = 1;
    this.yspeed = 0;
-   this.scale = 2;
+   this.scale = 1;
 
    this.updatePosition = function() {
       this.x = this.x + this.xspeed * this.scale;
@@ -49,8 +50,8 @@ function Snake() {
       this.yspeed = y;
    }
 
-   this.getScale = function() {
-      var scale = document.querySelector("form");
-      this.scale = scale.value;
+   this.updateScale = function() {
+      this.scale = document.getElementById('scaleInput').value;
+      console.log(scale);
    }
 }
