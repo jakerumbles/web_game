@@ -1,0 +1,24 @@
+{
+  "name": "web_game",
+  "version": "1.0.0",
+  "description": "My first gui web game",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakerumbles/web_game.git"
+  },
+  "author": "Jake Edwards",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jakerumbles/web_game/issues"
+  },
+  "homepage": "https://github.com/jakerumbles/web_game#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "path": "^0.12.7"
+  }
+}
